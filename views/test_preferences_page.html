@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> </title>
+</head>
+<body style="background-color:#141414;height='100%';width='100%'">
+  <header>
+    <div style="background-color:#10e6cd;padding:20px;width:screen.width px;height:90px;align:right;margin-left:0px">
+    <img src='/static/logo.jpg' height="200px" class='center' style="display: block;margin-left: auto;
+      margin-right: auto;height: 150px;margin-top:auto;">
+  </header>
+  <style type="text/css">
+    .textlabel {
+  background-color: #10e6cd;
+  border: 2px solid #10e6cd;
+  color: #10e6cd;
+  background-color: #141414;
+  text-align: center;
+  display:block;
+  font-size: 20px;
+  padding: 15px 0px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  width: 40%;
+  border-radius: 32px;
+  font-family: "Ubuntu", Ubuntu;
+}
+
+    .timelabel {
+  background-color: #10e6cd;
+  border: 2px solid #10e6cd;
+  color: white;
+  background-color: #141414;
+  text-align: center;
+  display:inline-block;
+  font-size: 20px;
+  padding: 15px 0px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  width: 10%;
+  border-radius: 32px;
+  font-family: "Ubuntu", Ubuntu;
+}
+.label {
+  background-color: #10e6cd;
+  color: #10e6cd;
+  background-color: #141414;
+  text-align: center;
+  display:block;
+  font-size: 35px;
+  padding: 15px 0px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  width: 40%;
+  border-radius: 32px;
+  font-family: "Ubuntu", Ubuntu;
+}
+
+.button1 {
+  background-color: #141414;
+  color: #10e6cd;
+  border: 2px solid #10e6cd;
+}
+
+.button1:hover {
+  background-color: #10e6cd ;
+  color: #141414;
+}
+
+  </style>
+  <div style="background-color:#141414;width:screen.width;display: block;margin-top: 70px">
+  <form action="#" method="POST">
+    <label class= "label" style='background-color:#10e6cd;color: black ' class = "label">Test Name</label><br>
+    <input type="text" name="testname" class= "textlabel" placeholder="Enter the testname here..." style="color: white"><br><br>
+    <label class = "label" style='background-color:#10e6cd;color: black '>Time Alotted (Hours:Minutes)</label><br>
+    <div align="center">
+    <input class = "timelabel" type="number" value = "0" min = "0" name="hour" placeholder="Hours"> <input class = "timelabel" type="number" value = "0" min = "0" name="minute" placeholder="Minutes">
+  </div><br><br>
+  <div style="background-color: #090909;width: 100%;padding-top: 10px;height: 65px">
+    <input class = "textlabel button1" type="submit" value="Create Test" style="width: 10%">
+  </div>
+  </form>
+</div>
+</body>
+</html>
