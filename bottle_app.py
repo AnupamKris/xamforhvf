@@ -1,5 +1,7 @@
 from mediafire.client import (MediaFireClient, File, Folder)
+import time
 import os
+from mega import Mega
 #Upload
 def upload(filename,foldername):
     imagepath = '/home/xamforhvf/imgdir/'
@@ -31,12 +33,14 @@ def upload(filename,foldername):
     link = link[:point]+'6g'+link[ext:]
     return link
 
+
 def createfolder(foldername):
     client = MediaFireClient()
     client.login( email='projectxamforhvf@gmail.com',
         password='thisisapassword',
         app_id='42511')
     client.create_folder('/'+foldername)
+
 # A very simple Bottle Hello World app for you to get started with...
 from bottle import default_app
 from bottle import route, run, template, request, post, redirect, static_file
@@ -106,6 +110,8 @@ def student_options():
 		return redirect('/write')
 	elif option == 'View Result':
 		return redirect('/studentpage/result')
+	elif option == 'Study Materials':
+	    return redirect('/studentpage/downloadmaterials')
 
 @route('/studentpage/result')
 def result_auth_student():
@@ -126,45 +132,46 @@ def view_result_student():
 
 @route('/studentpage/result/<testname>/<studcode>')
 def display_result(testname,studcode):
-	try:
-		client = gspread.authorize(creds)
-		spreadsheetresult = client.open("resultData")
-		resultsheet = spreadsheetresult.worksheet(testname)
-		spreadsheetanswer = client.open("answerData")
-		answersheet = spreadsheetanswer.worksheet(testname)
-		spreadsheetquestion = client.open("questionData")
-		questionpaper = spreadsheetquestion.worksheet(testname)
-		questions = questionpaper.get_all_values()
-		submissions = answersheet.get_all_values()
-		questiondata = []
-		markdata = []
-		options = []
-		print(questions)
-		for i in questions:
-			questiondata.append(i[2])
-			markdata.append(i[7])
-			options.append(i[3:7])
-		for i in submissions:
-			if i[0] == studcode:
-				answers = i
-				print(answers)
-		if answers[1].lower() == 'true':
-			df = pd.read_excel('/home/xamforhvf/e-Xam/static/studentdata.xls')
-			tempvar = df.loc[df['Student Code'] == int(studcode)]
-			studname = list(tempvar['Student Name'])[0]
-			print(studname)
-		list_of_lists = resultsheet.get_all_values()
-		for j in list_of_lists:
-			if j[1] == studcode:
-				print(j)
-				marks = j[2:-1]
-				total = j[-1]
-				return template('student_result_page',{'answers' : answers,'questions' : questiondata, 'markdata':markdata, 'options':options,'testname':testname,'studname':studname,'marks':marks,'total':total})
-		else:
-		    raise Exception
-	except:
-		return redirect('/serror404/Invalid Details Submitted Please retry or Your Paper has not been evaluated yet..')
-
+    try:
+        client = gspread.authorize(creds)
+        spreadsheetresult = client.open("resultData")
+        resultsheet = spreadsheetresult.worksheet(testname)
+        spreadsheetanswer = client.open("answerData")
+        answersheet = spreadsheetanswer.worksheet(testname)
+        spreadsheetquestion = client.open("questionData")
+        questionpaper = spreadsheetquestion.worksheet(testname)
+        questions = questionpaper.get_all_values()
+        submissions = answersheet.get_all_values()
+        questiondata = []
+        markdata = []
+        options = []
+        print(questions)
+        for i in questions:
+            questiondata.append(i[2])
+            markdata.append(i[7])
+            options.append(i[3:7])
+        for i in submissions:
+            # print(int(i[0]),int(studcode))
+            if int(i[0]) == int(studcode):
+                answers = i
+                print(answers)
+        if answers[1].lower() == 'true':
+            df = pd.read_excel('/home/xamforhvf/e-Xam/static/studentdata.xls')
+            tempvar = df.loc[df['Student Code'] == int(studcode)]
+            studname = list(tempvar['Student Name'])[0]
+            print(studname)
+        list_of_lists = resultsheet.get_all_values()
+        for j in list_of_lists:
+            # print('checj',j[1],studcode)
+            if int(j[1]) == int(studcode):
+                print(j)
+                marks = j[2:-1]
+                total = j[-1]
+                return template('student_result_page',{'answers' : answers,'questions' : questiondata, 'markdata':markdata, 'options':options,'testname':testname,'studname':studname,'marks':marks,'total':total})
+        else:
+            raise Exception
+    except:
+        return redirect('/serror404/Invalid Details Submitted Please retry or Your Paper has not been evaluated yet..')
 
 @route('/teacherpage')
 def teacherpage():
@@ -180,6 +187,9 @@ def teacherlogin():
 	    return template('teacher_authorization_page',{'message' : 'Invalid Password'})
 
 
+
+
+
 @route('/teacherpage/fhgbivqhvtyukqhvtruiqhvuijiquyj1iovyhivgjskghwvejjumauiicjijyiofvjgyiogjiy')
 def teacherhome():
 	return template('teacher_home_page')
@@ -187,13 +197,68 @@ def teacherhome():
 
 @post('/teacherpage/fhgbivqhvtyukqhvtruiqhvuijiquyj1iovyhivgjskghwvejjumauiicjijyiofvjgyiogjiy')
 def evaloptions():
-	option = request.forms.get('option')
-	if option == 'Create Test':
-		redirect('/iqwueyraskdjfhqoiuryaskjfhpqoutyskjdfhpiuryksajdfhsjfhdlksdfhhsfghfhdfhfgds')
-	elif option == 'Evaluate Submissions':
-		redirect('/uioquiwtqvui4tyuirteuioreguifskdfiodsfsiofiegiofldjklsfioshflskdhfkshfjsdhf')
-	elif option == 'View Result':
-		redirect('/jsfdgiuasbuiybtuibiueytuerhtukihtuiembkhmiuigmjibhruthkwhybgtbiuhetbkehbtih')
+    option = request.forms.get('option')
+    if option == 'Create Test':
+    	redirect('/iqwueyraskdjfhqoiuryaskjfhpqoutyskjdfhpiuryksajdfhsjfhdlksdfhhsfghfhdfhfgds')
+    elif option == 'Evaluate Submissions':
+    	redirect('/uioquiwtqvui4tyuirteuioreguifskdfiodsfsiofiegiofldjklsfioshflskdhfkshfjsdhf')
+    elif option == 'View Result':
+    	redirect('/jsfdgiuasbuiybtuibiueytuerhtukihtuiembkhmiuigmjibhruthkwhybgtbiuhetbkehbtih')
+    elif option == 'Preview Test':
+        redirect('/teacher_preview')
+    elif option == 'Upload Material':
+        redirect('/jjkxvxvcnxzmsdfdafgsfgsdfgshdsgafjfjhsdfgfgj')
+
+@route('/teacher_preview')
+def preview():
+    return template('teacher_preview')
+
+@post('/teacher_preview')
+def previewname():
+    testname = request.forms.get('testname')
+    return redirect('/previewpage/'+testname)
+
+
+@route('/previewpage/<testname>')
+def showpreview(testname):
+    spreadsheetquestion = client.open("questionData")
+    timespreadsheet = client.open("timeData")
+    imagespreadsheet = client.open("imageData")
+    timesheet = timespreadsheet.worksheet(testname)
+    imagesheet = imagespreadsheet.worksheet(testname)
+    hour = int(timesheet.acell('A1').value)
+    minute = int(timesheet.acell('B1').value)
+    time = minute*60+hour*60*60
+    print(time)
+    worksheet = spreadsheetquestion.worksheet(testname)
+    questiondata = worksheet.get_all_values()
+    imagespreadsheet = client.open("imageData")
+    imagesheet = imagespreadsheet.worksheet(testname)
+    imageraw = imagesheet.get_all_values()
+    imageDic = {}
+    for imageindex in range(1,len(questiondata)+1):
+        try:
+            imageDic[imageindex] = imageraw[imageindex-1][0]
+        except:
+            imageDic[imageindex] = ''
+
+    questions = {}
+    x = 1
+    print(questiondata)
+    for data in questiondata:
+        if data[1] == 'mcq':
+            questions[x] = {'Q':data[2],'A':data[3],'B':data[4],'C':data[5],'D':data[6],'mark':data[7]}
+            x+=1
+        elif data[1] == 'sub':
+            questions[x] = {'Q':data[2],'mark':data[7]}
+            x+=1
+    print(questions)
+    print(imageDic)
+    return template('test_preview_page',{'questions': questions,'testname':testname,'time':time,'imgDic':imageDic})
+
+@post('/previewpage/<testname>')
+def returntopage(testname):
+    return redirect('/teacherpage/fhgbivqhvtyukqhvtruiqhvuijiquyj1iovyhivgjskghwvejjumauiicjijyiofvjgyiogjiy')
 
 @route('/jsfdgiuasbuiybtuibiueytuerhtukihtuiembkhmiuigmjibhruthkwhybgtbiuhetbkehbtih')
 def teacher_result_auth_page():
@@ -232,11 +297,97 @@ def testprocess():
     testdatanameetc = {'tnme': testname}
     return redirect('/iqwueyraskdjfhqoiuryaskjfhpqoutyskjdfhpiuryksajdfhsjfhdlksdfhhsfghfhdfhfgds/create/'+testdatanameetc['tnme']+f'/{hours}/{minutes}')
 
+@route('/studentpage/downloadmaterials')
+def allmaterialspage():
+    global client
+    uploadspreadsheet = client.open('uploadData')
+    uploadsheet = uploadspreadsheet.worksheet('Sheet1')
+    data = uploadsheet.get_all_values()
+    return template('student_material_download_page', {'data':data})
+
+@route('/jjkxvxvcnxzmsdfdafgsfgsdfgshdsgafjfjhsdfgfgj')
+def uploadassignment():
+    return template('teacher_file_upload_page')
+
+
+def uploadass(filename):
+    imagepath = '/home/xamforhvf/imgdir/'
+    imagepath+=filename
+    print(imagepath)
+    print(filename)
+    client = MediaFireClient()
+    client.login( email='projectxamforhvf2@gmail.com',
+        password='thisisapassword',
+        app_id='42511')
+
+    print('login')
+    link = ''
+    for i in range(10):
+        try:
+            print('doing upload')
+            result = client.upload_file(imagepath, f"mf:/")
+            fileinfo = client.api.file_get_info(result.quickkey)
+            link = fileinfo['file_info']['links']['normal_download']
+            break
+        except:
+            print('retrying')
+    return link
+
+
+
+@post('/jjkxvxvcnxzmsdfdafgsfgsdfgshdsgafjfjhsdfgfgj')
+def do_assign_upload():
+    teachername = request.forms.get('teachername')
+    clas = request.forms.get('class')
+    subject = request.forms.get('subject')
+    title = request.forms.get('title')
+    section = request.forms.get('section')
+    file = request.files.get('upload')
+    filename, ext = os.path.splitext(file.filename)
+    valuelist = [teachername, title, subject, clas, section]
+    print(filename, ext)
+    filedata =  request.files
+    curtime = time.asctime().replace(':','-')
+    for i in filedata.keys():
+        newfilename = title + '(' + curtime + ')' + ext
+        valuelist.append(curtime)
+        print(filename)
+        print(i)
+        for j in range(3):
+            print('saving'+str(j))
+            filedata[i].save(f"/home/xamforhvf/imgdir/{newfilename}",overwrite = True)
+        try:
+            link = uploadass(newfilename)
+            valuelist.append(link)
+            print(link)
+        except:
+            print('except')
+        finally:
+            os.remove(f'/home/xamforhvf/imgdir/{newfilename}')
+        if link == '':
+            return redirect('/terror404/Upload Failed!')
+        else:
+            global client
+            print(valuelist)
+            uploadspreadsheet = client.open('uploadData')
+            uploadsheet = uploadspreadsheet.worksheet('Sheet1')
+            all_values = uploadsheet.get_all_values()
+            current_cell = len(all_values)
+            cell_list = uploadsheet.range(f"A{current_cell+1}:G{current_cell+1}")
+
+            curval = 0
+            for cell in cell_list:
+                cell.value = valuelist[curval]
+                curval += 1
+            uploadsheet.update_cells(cell_list)
+            return redirect('/terror404/Uploaded Successfuly!')
+
 
 @route('/iqwueyraskdjfhqoiuryaskjfhpqoutyskjdfhpiuryksajdfhsjfhdlksdfhhsfghfhdfhfgds/create/<testname>/<hours>/<minutes>')
 def testcreatepage(testname,hours,minutes):
 	global testdatanameetc
 	return template('question_creation_page',testdatanameetc)
+
 
 @post('/iqwueyraskdjfhqoiuryaskjfhpqoutyskjdfhpiuryksajdfhsjfhdlksdfhhsfghfhdfhfgds/create/<testname>/<hours>/<minutes>')
 def upload_to_server(testname,hours,minutes):
@@ -553,5 +704,5 @@ def saveresult(testname,studcode):
 application = default_app()
 
 # if __name__ == '__main__':
-	# run(reloader = True,debug = True)
+# 	run(reloader = True,debug = True)
 

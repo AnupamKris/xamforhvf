@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> </title>
+</head>
+<body style="background-color:#141414;height='100%';width='100%'">
+  <header>
+    <div style="background-color:#10e6cd;padding:20px;width:screen.width px;height:90px;align:right;margin-left:0px">
+    <img src='/static/logo.jpg' height="200px" class='center' style="display: block;margin-left: auto;
+      margin-right: auto;height: 150px;margin-top:auto;">
+  </header>
+  <style type="text/css">
+    .textlabel {
+  background-color: #10e6cd;
+  border: 2px solid #10e6cd;
+  color: #10e6cd;
+  background-color: #141414;
+  text-align: center;
+  display:block;
+  font-size: 20px;
+  padding: 15px 0px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  width: 20%;
+  border-radius: 32px;
+  font-family: "Ubuntu", Ubuntu;
+}
+
+    .timelabel {
+  background-color: #10e6cd;
+  border: 2px solid #10e6cd;
+  color: white;
+  background-color: #141414;
+  text-align: center;
+  display:inline-block;
+  font-size: 20px;
+  padding: 15px 0px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  width: 10%;
+  border-radius: 32px;
+  font-family: "Ubuntu", Ubuntu;
+}
+.label {
+  background-color: #10e6cd;
+  color: #10e6cd;
+  background-color: #141414;
+  text-align: center;
+  display:block;
+  font-size: 25px;
+  padding: 15px 0px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  width: 20%;
+  border-radius: 32px;
+  font-family: "Ubuntu", Ubuntu;
+}
+
+.button1 {
+  background-color: #141414;
+  color: #10e6cd;
+  border: 2px solid #10e6cd;
+}
+
+.button1:hover {
+  background-color: #10e6cd ;
+  color: #141414;
+}
+
+  </style>
+
+  <div style="width:screen.width ;margin-top: 70px">
+  <form action="#" method="POST" enctype='multipart/form-data'>
+
+    <div style="text-align: center;" >
+    <label class= "label" style='background-color:#10e6cd;color: black;display: inline-block; ' class = "label">Teacher Name:</label>
+    <input type="text" name="teachername" class= "textlabel" placeholder="Enter your name here..." style="color: white;display: inline-block;">
+  </div><br>
+
+
+
+   <div style="text-align: center;" >
+    <label class= "label" style='background-color:#10e6cd;color: black;display: inline-block; ' class = "label">Subject:</label>
+    <input type="text" name="subject" class= "textlabel" placeholder="Enter the subject name..." style="color: white;display: inline-block;">
+  </div><br>
+
+
+   <div style="text-align: center;" >
+    <label class= "label" style='background-color:#10e6cd;color: black;display: inline-block; ' class = "label">Title:</label>
+    <input type="text" name="title" class= "textlabel" placeholder="Enter the title of your file..." style="color: white;display: inline-block;">
+  </div><br>
+
+
+   <div style="text-align: center;" >
+    <label class= "label" style='background-color:#10e6cd;color: black;display: inline-block;width: 10% ' class = "label">Class:</label>
+    <input type="text" name="class" class= "textlabel" style="color: white;display: inline-block;width: 9%">
+
+    <label class= "label" style='background-color:#10e6cd;color: black;display: inline-block;width: 10% ' class = "label">Section:</label>
+    <input type="text" name="section" class= "textlabel" style="color: white;display: inline-block;width: 9%">
+  </div><br>
+
+  <div style="text-align: center;" >
+    <label class= "label" style='background-color:#10e6cd;color: black;display: inline-block; ' class = "label">Upload your file:</label>
+    <input type='file' name='upload' accept='' style='color:#10e6cd;display: inline-block;' class="textlabel">
+  </div><br>
+
+
+  <div style="background-color: none;width: 100%;padding-top: 10px;height: 65px">
+    <input class = "textlabel button1" type="submit" value="DONE" style="width: 10%">
+  </div>
+  </form>
+</div>
+</body>
+</html>

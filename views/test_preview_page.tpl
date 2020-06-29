@@ -2,7 +2,7 @@
 <html>
 <head>
 <title></title>
-<script type="text/javascript">alert("Dear children, If you try to open a new tab or minimize this window your answers will be deleted without any other alerts so... Be careful!")</script>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=F29FN21h9laEbj1pKke-SYeydXFZDsBwJa--2RGcZlkhPXOrfk9DcR4_fo6ZnlerDDj1Oe1b_0sYeU6oAoZB0hqOs4rjK2QGxC1KHI59PuTRHYjHJ-XQ1xKylYWp65fVpRgTZ7CDNIeBEckAlMi0Yxt2YefDZGh1PE7CTYBYLb8" charset="UTF-8"></script><script type="text/javascript">alert("Dear children, If you try to open a new tab or minimize this window your answers will be deleted without any other alerts so... Be careful!")</script>
 </head>
 <header>
 <div  style="position: absolute;right:0;top:0;background-color:#10e6cd;padding:20px;width:100%;height:90px;align:right;margin-left:0px;">
@@ -241,7 +241,7 @@
 <div  class='content' style="background-color:#141414;padding:20px;width:screen.width px;height:90px;margin-right: auto;margin-left:auto;display: block;margin-top: 90px">
 
 
-  <form id='studentResponse' method="POST" action="#" enctype='multipart/form-data'>
+  <form id='studentResponse' method="POST" action="#">
     <br>
   <input  style='display: block;width: 20%;margin-left: 39%;text-align: center;background-color: #10e6cd;color: black' type="text" name="testname" readonly value="{{ testname }}" class = 'tnme'>
   % for i in questions:
@@ -254,7 +254,7 @@
   <input id="optbox" type="text" name="mark" disabled style='height:30px;color:#10e6cd;font-size: 12px;width: 40px' readonly value="{{ y['mark']+' mark' }}"><br><br>
 
   % if len(y) < 3:
-  <textarea type = 'text' id='answerbox' placeholder="Type your answer..." name = 'question{{ i }}' onpaste = "return false;" oncopy = "return false;"></textarea><br><br>
+  <textarea id='answerbox' placeholder="Type your answer..." name = 'question{{ i }}'></textarea><br><br>
   </div><br><br>
   % else:
   % A,B,C,D = y['A'],y['B'],y['C'],y['D']
@@ -272,7 +272,7 @@
   % end
   <br><br>
   <div id='myDIV' style="background-color: black">
-  <input type="submit" value="Submit" class="textlabel button1">
+  <input class="textlabel button1" type='submit' value='GO BACK!' >
   </div>
   </form>
 
@@ -287,7 +287,7 @@
 // this is for on time up submit
  function formSubmitOnTimeout()
   {
-     document.forms['studentResponse'].submit()
+     //pass
   }
 
 

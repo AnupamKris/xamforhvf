@@ -108,10 +108,11 @@ $(document).ready(function(){
     questionNumber+=1
   });
 });
-function sub() {
-  document.getElementById("formm").submit();
+function sub(){
+  if (confirm("Are you Sure Want to Submit? You cannot edit this later. Please carefully check everything!")) {
+    document.forms['formm'].submit();
+  } else {}
 }
-
 </script>
 </body>
 </html>
