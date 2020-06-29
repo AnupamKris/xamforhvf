@@ -4,12 +4,12 @@ import os
 from mega import Mega
 #Upload
 def upload(filename,foldername):
-    imagepath = '/home/xamforhvf/imgdir/'
+    imagepath = '/home/xamforcrpf/imgdir/'
     imagepath+=filename+'.jpg'
     print(imagepath)
     print(filename)
     client = MediaFireClient()
-    client.login( email='projectxamforhvf@gmail.com',
+    client.login( email='xamforcrpfdb@gmail.com',
         password='thisisapassword',
         app_id='42511')
 
@@ -36,7 +36,7 @@ def upload(filename,foldername):
 
 def createfolder(foldername):
     client = MediaFireClient()
-    client.login( email='projectxamforhvf@gmail.com',
+    client.login( email='xamforcrpfdb@gmail.com',
         password='thisisapassword',
         app_id='42511')
     client.create_folder('/'+foldername)
@@ -156,7 +156,7 @@ def display_result(testname,studcode):
                 answers = i
                 print(answers)
         if answers[1].lower() == 'true':
-            df = pd.read_excel('/home/xamforhvf/e-Xam/static/studentdata.xls')
+            df = pd.read_excel('/home/xamforcrpf/e-Xam/static/studentdata.xls')
             tempvar = df.loc[df['Student Code'] == int(studcode)]
             studname = list(tempvar['Student Name'])[0]
             print(studname)
@@ -311,12 +311,12 @@ def uploadassignment():
 
 
 def uploadass(filename):
-    imagepath = '/home/xamforhvf/imgdir/'
+    imagepath = '/home/xamforcrpf/imgdir/'
     imagepath+=filename
     print(imagepath)
     print(filename)
     client = MediaFireClient()
-    client.login( email='projectxamforhvf2@gmail.com',
+    client.login( email='xamforcrpfdb2@gmail.com',
         password='thisisapassword',
         app_id='42511')
 
@@ -355,7 +355,7 @@ def do_assign_upload():
         print(i)
         for j in range(3):
             print('saving'+str(j))
-            filedata[i].save(f"/home/xamforhvf/imgdir/{newfilename}",overwrite = True)
+            filedata[i].save(f"/home/xamforcrpf/imgdir/{newfilename}",overwrite = True)
         try:
             link = uploadass(newfilename)
             valuelist.append(link)
@@ -363,7 +363,7 @@ def do_assign_upload():
         except:
             print('except')
         finally:
-            os.remove(f'/home/xamforhvf/imgdir/{newfilename}')
+            os.remove(f'/home/xamforcrpf/imgdir/{newfilename}')
         if link == '':
             return redirect('/terror404/Upload Failed!')
         else:
@@ -448,7 +448,7 @@ def upload_to_server(testname,hours,minutes):
         print(i)
         # try:
         for retries in range(20):
-            imagedataretrived[i].save(f'/home/xamforhvf/imgdir/{i}.jpg',overwrite = True)
+            imagedataretrived[i].save(f'/home/xamforcrpf/imgdir/{i}.jpg',overwrite = True)
             print(i,imagedataretrived[i])
             print('try:',retries)
             try:
@@ -456,7 +456,7 @@ def upload_to_server(testname,hours,minutes):
                 break
             except:
                 print('except')
-        os.remove(f'/home/xamforhvf/imgdir/{i}.jpg')
+        os.remove(f'/home/xamforcrpf/imgdir/{i}.jpg')
         # return redirect('/terror404/Test Creation Failed Due to a network issue please create a test with different name or Unsupoorted file format Only jpg and jpeg are supported')
         print(link)
         imageworksheet.update_acell(f'A{i[-1]}',link)
@@ -498,7 +498,7 @@ def writepage():
 def checktest():
 	testname = request.forms.get('testname')
 	studcode = request.forms.get('studcode')
-	df = pd.read_excel('/home/xamforhvf/e-Xam/static/studentdata.xls')
+	df = pd.read_excel('/home/xamforcrpf/e-Xam/static/studentdata.xls')
 	tempvar = df.loc[df['Student Code'] == int(studcode)]
 	try:
 		studname = list(tempvar['Student Name'])[0]
@@ -664,7 +664,7 @@ def displaysheet(studcode,testname):
 			print(i)
 
 	if answers[1].lower() == 'false':
-		df = pd.read_excel('/home/xamforhvf/e-Xam/static/studentdata.xls')
+		df = pd.read_excel('/home/xamforcrpf/e-Xam/static/studentdata.xls')
 		tempvar = df.loc[df['Student Code'] == int(studcode)]
 		studname = list(tempvar['Student Name'])[0]
 		print(studname)
